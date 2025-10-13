@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "mVJee6u7Va0=",
+  "success": true,
+  "projectFilePath": "/Users/islem/Desktop/BookStore/BookStore.Api/BookStore.Api.csproj",
+  "expectedPackageFiles": [
+    "/Users/islem/.nuget/packages/microsoft.aspnetcore.openapi/9.0.9/microsoft.aspnetcore.openapi.9.0.9.nupkg.sha512",
+    "/Users/islem/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
