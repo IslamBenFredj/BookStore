@@ -411,6 +411,29 @@
         "build": {
           "build/net6.0/xunit.runner.visualstudio.props": {}
         }
+      },
+      "BookStore.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/BookStore.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BookStore.Core.dll": {}
+        }
+      },
+      "BookStore.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "BookStore.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BookStore.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BookStore.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -932,10 +955,22 @@
         "xunit.runner.visualstudio.2.8.2.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "BookStore.Core/1.0.0": {
+      "type": "project",
+      "path": "../BookStore.Core/BookStore.Core.csproj",
+      "msbuildProject": "../BookStore.Core/BookStore.Core.csproj"
+    },
+    "BookStore.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../BookStore.Infrastructure/BookStore.Infrastructure.csproj",
+      "msbuildProject": "../BookStore.Infrastructure/BookStore.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "BookStore.Core >= 1.0.0",
+      "BookStore.Infrastructure >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.12.0",
       "coverlet.collector >= 6.0.2",
       "xunit >= 2.9.2",
@@ -966,7 +1001,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/islem/Desktop/BookStore/BookStore.Core/BookStore.Core.csproj": {
+              "projectPath": "/Users/islem/Desktop/BookStore/BookStore.Core/BookStore.Core.csproj"
+            },
+            "/Users/islem/Desktop/BookStore/BookStore.Infrastructure/BookStore.Infrastructure.csproj": {
+              "projectPath": "/Users/islem/Desktop/BookStore/BookStore.Infrastructure/BookStore.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

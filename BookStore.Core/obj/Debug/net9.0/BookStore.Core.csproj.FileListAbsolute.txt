@@ -1,0 +1,12 @@
+/Users/islem/Desktop/BookStore/BookStore.Core/bin/Debug/net9.0/BookStore.Core.deps.json
+/Users/islem/Desktop/BookStore/BookStore.Core/bin/Debug/net9.0/BookStore.Core.dll
+/Users/islem/Desktop/BookStore/BookStore.Core/bin/Debug/net9.0/BookStore.Core.pdb
+/Users/islem/Desktop/BookStore/BookStore.Core/obj/Debug/net9.0/BookStore.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/islem/Desktop/BookStore/BookStore.Core/obj/Debug/net9.0/BookStore.Core.AssemblyInfoInputs.cache
+/Users/islem/Desktop/BookStore/BookStore.Core/obj/Debug/net9.0/BookStore.Core.AssemblyInfo.cs
+/Users/islem/Desktop/BookStore/BookStore.Core/obj/Debug/net9.0/BookStore.Core.csproj.CoreCompileInputs.cache
+/Users/islem/Desktop/BookStore/BookStore.Core/obj/Debug/net9.0/BookStore.Core.sourcelink.json
+/Users/islem/Desktop/BookStore/BookStore.Core/obj/Debug/net9.0/BookStore.Core.dll
+/Users/islem/Desktop/BookStore/BookStore.Core/obj/Debug/net9.0/refint/BookStore.Core.dll
+/Users/islem/Desktop/BookStore/BookStore.Core/obj/Debug/net9.0/BookStore.Core.pdb
+/Users/islem/Desktop/BookStore/BookStore.Core/obj/Debug/net9.0/ref/BookStore.Core.dll

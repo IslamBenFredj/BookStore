@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net9.0": {}
+    "net9.0": {
+      "BookStore.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/BookStore.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BookStore.Core.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "BookStore.Core/1.0.0": {
+      "type": "project",
+      "path": "../BookStore.Core/BookStore.Core.csproj",
+      "msbuildProject": "../BookStore.Core/BookStore.Core.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net9.0": []
+    "net9.0": [
+      "BookStore.Core >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "/Users/islem/.nuget/packages/": {}
@@ -31,7 +50,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/islem/Desktop/BookStore/BookStore.Core/BookStore.Core.csproj": {
+              "projectPath": "/Users/islem/Desktop/BookStore/BookStore.Core/BookStore.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
