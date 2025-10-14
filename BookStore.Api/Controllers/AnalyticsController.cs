@@ -20,4 +20,12 @@ public class AnalyticsController : ControllerBase
         var result = await _analyticsService.GetTopAuthorsBySalesAsync(3);
         return Ok(result);
     }
+
+    [HttpGet("average-sales-by-genre")]
+    public async Task<IActionResult> GetAverageSalesByGenre()
+    {
+        var result = await _analyticsService.GetSalesAverageByGenre();
+        Console.WriteLine($"Nombre de genres trouvés : {result.Count()}");
+        return Ok(result);
+    }
 }
