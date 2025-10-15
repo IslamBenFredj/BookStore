@@ -36,4 +36,29 @@ public class BookAnalyticsServiceTests
         Assert.Equal("Bob Durand", list[0].AuthorName);
         Assert.Equal(200, list[0].TotalSales);
     }
+
+    [Fact]
+    public async Task GetSalesAverageByGenre_ReturnsCorrectAverages()
+    {
+        // Arrange
+        var bookRepo = new InMemoryBookRepository();
+        var book1 = new Book { Title = "Livre A", Genre = "Fiction", SoldCopies = 100 };
+        var book2 = new Book { Title = "Livre B", Genre = "Fiction", SoldCopies = 200 };
+        var book3 = new Book { Title = "Livre C", Genre = "Non-Fiction", SoldCopies = 300 };
+
+        await bookRepo.AddAsync(book1);
+        await bookRepo.AddAsync(book2);
+        await bookRepo.AddAsync(book3);
+
+
+        var service = new BookAnalyticsService(bookRepo, new InMemoryAuthorRepository());
+        // Act
+        var result = await service.GetSalesAverageByGenre();
+        var list = result.ToList();
+        
+        // Assert
+        Assert.Equal(150, list.First(g => g.Genre == "Fiction").AverageSales);
+        Assert.Equal(300, list.First(g => g.Genre == "Non-Fiction").AverageSales);
+    }
+
 }
