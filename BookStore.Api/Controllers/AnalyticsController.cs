@@ -28,4 +28,11 @@ public class AnalyticsController : ControllerBase
         Console.WriteLine($"Nombre de genres trouvés : {result.Count()}");
         return Ok(result);
     }
+
+    [HttpGet("max-sold-book-by-genre")]
+    public async Task<IActionResult> GetMaxSoldBookByGenre()
+    {
+        var result = await _analyticsService.GetMaxSoldBookByGenre();
+        return Ok(result);
+    }
 }
