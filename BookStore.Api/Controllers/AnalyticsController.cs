@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using BookStore.Core.Services;
+using System.Reflection;
 
 namespace BookStore.Api.Controllers;
 
@@ -39,6 +40,12 @@ public class AnalyticsController : ControllerBase
     public async Task<IActionResult> GetBooksPublishedAfter2010()
     {
         var result = await _analyticsService.GetBooksPublishedAfter2010();
+        return Ok(result);
+    }
+    [HttpGet("get-books-cost-more-than-twenty-euros")]
+    public async Task<IActionResult> getAllBooksThaCostMoreThen20Euros()
+    {
+        var result = await _analyticsService.getAllBooksThaCostMoreThen20Euros();
         return Ok(result);
     }
 }
