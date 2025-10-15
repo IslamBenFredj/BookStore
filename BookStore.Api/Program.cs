@@ -23,9 +23,9 @@ var app = builder.Build();
 // 🌱 SEEDING DES DONNÉES
 var bookRepo = app.Services.GetRequiredService<IBookRepository>();
 
-bookRepo.AddAsync(new Book { Title = "Livre A", Genre = "Fiction", SoldCopies = 100 }).Wait();
-bookRepo.AddAsync(new Book { Title = "Livre B", Genre = "Fiction", SoldCopies = 200 }).Wait();
-bookRepo.AddAsync(new Book { Title = "Livre C", Genre = "Non-Fiction", SoldCopies = 300 }).Wait();
+bookRepo.AddAsync(new Book { Title = "Livre A", Genre = "Fiction", SoldCopies = 100, Published = new DateTime(2011,01,12) }).Wait();
+bookRepo.AddAsync(new Book { Title = "Livre B", Genre = "Fiction", SoldCopies = 200, Published = new DateTime(2001,01,12) }).Wait();
+bookRepo.AddAsync(new Book { Title = "Livre C", Genre = "Non-Fiction", SoldCopies = 300, Published = new DateTime(2015,11,30) }).Wait();
 
 
 Console.WriteLine("📚 Données initiales seedées avec succès !");

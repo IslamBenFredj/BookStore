@@ -35,4 +35,10 @@ public class AnalyticsController : ControllerBase
         var result = await _analyticsService.GetMaxSoldBookByGenre();
         return Ok(result);
     }
+    [HttpGet("books-published-after-2010")]
+    public async Task<IActionResult> GetBooksPublishedAfter2010()
+    {
+        var result = await _analyticsService.GetBooksPublishedAfter2010();
+        return Ok(result);
+    }
 }
