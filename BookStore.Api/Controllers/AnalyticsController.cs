@@ -48,4 +48,11 @@ public class AnalyticsController : ControllerBase
         var result = await _analyticsService.getAllBooksThaCostMoreThen20Euros();
         return Ok(result);
     }
+
+    [HttpGet("get-books-ordered-by-date-ascending")]
+    public async Task<IActionResult> GetBooksOrderedByPublishDate()
+    {
+        var result = await _analyticsService.GetBooksOrderedByPublishDate();
+        return Ok(result);
+    }
 }
