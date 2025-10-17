@@ -1,5 +1,9 @@
+using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using BookStore.Core.DTOs;
 using BookStore.Core.Interfaces;
+using BookStore.Core.Models;
+using Microsoft.VisualBasic;
 
 namespace BookStore.Core.Services;
 
@@ -50,8 +54,54 @@ public class BookAnalyticsService
                         Genre = g.Key,
                         AverageSales = g.Average(x => x.SoldCopies)
                     };
-        
+
         // 4- retourner une liste de GenreSalesDto
+        return query;
+    }
+
+    public async Task<IEnumerable<BestSellerByGenre>> GetMaxSoldBookByGenre()
+    {
+        var books = await _bookRepository.GetAllAsync();
+        var query = books
+                    .GroupBy(b => b.Genre) // IGrouping<Genre, List<Book>>
+                    .Select(g =>
+                    {
+                        var mostSold = g.MaxBy(b => b.SoldCopies);
+                        if (mostSold == null)
+                            return null; // pas de livres dans ce groupe
+                        return new BestSellerByGenre
+                        {
+                            Genre = mostSold!.Genre,
+                            Title = mostSold!.Title,
+                            SoldCopies = mostSold.SoldCopies
+                        };
+                    }
+                    ).Where(b => b != null)           // filtre les nulls
+                     .Select(b => b!);
+        return query;
+
+    }
+
+    // Obtenir tous les livres publiés après l'année 2010.
+    public async Task<IEnumerable<Book>> GetBooksPublishedAfter2010()
+    {
+        var books = await _bookRepository.GetAllAsync();
+        var query = books.Where(b => b.Published.Year > 2010);
+        return query;
+    }
+    // Obtenir le titre de tous les livres dont le prix est supérieur à 20 €.
+    public async Task<IEnumerable<String>> getAllBooksThaCostMoreThen20Euros()
+    {
+        var books = await _bookRepository.GetAllAsync();
+        var query = books.Where(b => b.Price > 20).Select(b => b.Title);
+        return query;
+    }
+    // Trier les livres par date de publication (du plus récent au plus ancien). 
+    public async Task<IEnumerable<Book>> GetBooksOrderedByPublishDate()
+    {
+        // get all books
+        var books = await _bookRepository.GetAllAsync();
+        var query = books.OrderByDescending(b => b.Published);
         return query;
     }
 }
