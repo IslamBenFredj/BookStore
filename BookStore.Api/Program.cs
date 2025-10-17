@@ -11,7 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton<IBookRepository, InMemoryBookRepository>();
 builder.Services.AddScoped<IAuthorRepository, InMemoryAuthorRepository>();
+builder.Services.AddSingleton<IUserRepository, InMemoryUserRepository>();
 builder.Services.AddScoped<BookAnalyticsService>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
