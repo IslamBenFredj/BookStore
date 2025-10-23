@@ -23,6 +23,7 @@ builder.Services.AddScoped<BookAnalyticsService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+//**************** Configurer Identity + JWT [Début] ****************//
 
 // 1) DbContext InMemory
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -52,6 +53,7 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false
     };
 });
+//**************** Configurer Identity + JWT [Fin] ****************//
 
 var app = builder.Build();
 
