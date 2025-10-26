@@ -35,7 +35,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 // 3) JWT Config
-var jwtKey = "super_secret_key_12345"; // ⚠️ à stocker dans appsettings.json plus tard
+var jwtKey = "this_is_a_super_super_secret_key_12345"; // ⚠️ à stocker dans appsettings.json plus tard
 var key = Encoding.ASCII.GetBytes(jwtKey);
 
 builder.Services.AddAuthentication(options =>
@@ -74,8 +74,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

@@ -45,7 +45,7 @@ public class AuthController : ControllerBase
         var check = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
         if (!check.Succeeded) return Unauthorized();
 
-        var key = Encoding.ASCII.GetBytes("super_secret_key_12345");
+        var key = Encoding.ASCII.GetBytes("this_is_a_super_super_secret_key_12345");
         var tokenHandler = new JwtSecurityTokenHandler();
         var tokenDescriptor = new SecurityTokenDescriptor
         {
