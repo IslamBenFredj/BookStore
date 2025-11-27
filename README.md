@@ -4,7 +4,14 @@
 
 This is a C# .NET 9 project that follows clean code principles and incorporates the following concepts: OOP principles, LINQ, Dependency Injection, and SOLID principles.
 
-**Proposed approach:** An ASP.NET Core Web API (minimal) named "BookStore" with a simple business domain (books, authors, users). This project will cover OOP, LINQ, DI, ASP.NET Core Identity + JWT Bearer, SOLID principles, unit testing, and some simple patterns (Repository, Service, DTO).
+**Proposed approach:** An ASP.NET Core Web API (minimal) named "BookStore" with a simple business domain (books, authors, users). This project will cover 
+- OOP, 
+- LINQ,
+- DI,
+- ASP.NET Core Identity + JWT Bearer, 
+- SOLID principles, 
+- unit testing, 
+- Some simple patterns (Repository, Service, DTO).
 
 ## Key Features Covered
 
