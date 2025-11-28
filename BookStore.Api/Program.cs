@@ -23,20 +23,52 @@ builder.Services.AddScoped<BookAnalyticsService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-//**************** Configurer Identity + JWT [Début] ****************//
+//**************** Configurer Identity + JWT [Début] sans appsettings.json ****************//
 
-// 1) DbContext InMemory
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseInMemoryDatabase("BookStoreAuth"));
+// // 1) DbContext InMemory
+// builder.Services.AddDbContext<AppDbContext>(options =>
+//     options.UseInMemoryDatabase("BookStoreAuth"));
 
-// 2) Identity
+// // 2) Identity
+// builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+//     .AddEntityFrameworkStores<AppDbContext>()
+//     .AddDefaultTokenProviders();
+
+// // 3) JWT Config
+// var jwtKey = "this_is_a_super_super_secret_key_12345"; // ⚠️ à stocker dans appsettings.json plus tard
+// var key = Encoding.ASCII.GetBytes(jwtKey);
+
+// builder.Services.AddAuthentication(options =>
+// {
+//     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+// })
+// .AddJwtBearer(options =>
+// {
+//     options.TokenValidationParameters = new TokenValidationParameters
+//     {
+//         ValidateIssuerSigningKey = true,
+//         IssuerSigningKey = new SymmetricSecurityKey(key),
+//         ValidateIssuer = false,
+//         ValidateAudience = false
+//     };
+// });
+//**************** Configurer Identity + JWT [Fin] sans appsettings.json ****************//
+
+
+var app = builder.Build();
+
+
+/**************** config de JWT avec appsettings.json DEBUT ****************/
+// 1) Ajouter Identity + roles
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
-
-// 3) JWT Config
-var jwtKey = "this_is_a_super_super_secret_key_12345"; // ⚠️ à stocker dans appsettings.json plus tard
-var key = Encoding.ASCII.GetBytes(jwtKey);
+// 2) Configuration du JWT
+var jwtConfig = builder.Configuration.GetSection("Jwt");
+var jwtKey = jwtConfig["Key"];
+var key = Encoding.UTF8.GetBytes(jwtKey);
 
 builder.Services.AddAuthentication(options =>
 {
@@ -49,13 +81,32 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false,
-        ValidateAudience = false
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidIssuer = jwtConfig["Issuer"],
+        ValidAudience = jwtConfig["Audience"]
     };
 });
-//**************** Configurer Identity + JWT [Fin] ****************//
 
-var app = builder.Build();
+// 3) Créer automatiquement les rôles au démarrage
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+
+    // 🔥 Création automatique des rôles Admin / User
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    string[] roles = new[] { "Admin", "User" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+            await roleManager.CreateAsync(new IdentityRole(role));
+    }
+}
+
+/**************** config de JWT avec appsettings.json FIN ****************/
+
 
 // 🌱 SEEDING DES DONNÉES
 var bookRepo = app.Services.GetRequiredService<IBookRepository>();
