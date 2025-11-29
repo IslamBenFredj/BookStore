@@ -33,6 +33,9 @@ public class AuthController : ControllerBase
         if (!result.Succeeded)
             return BadRequest(result.Errors);
 
+            // assigner le rôle User par défaut
+            await _userManager.AddToRoleAsync(user, "User");
+
         return Ok("User created");
     }
 
